@@ -1,0 +1,53 @@
+//Modified verson of $Bazaar_Item_Check with global item prevention check
+Function Bazaar_Item_Check ( agent ThisAgent, integer item, list potentials, integer Item_cost ) is boolean
+Declare
+//	list Potentials;
+	integer	Intel_Roll;
+//	integer Search_Dist;
+
+Begin
+	$DebugOut ( "Should I buy item#", item, "?" );
+
+// GLOBAL ITEM PREVENTION CHECK
+    If ($Is_Bazaar_Item_Disabled (item))
+        begin
+            $DebugOut ("Item #", item, " has been globally disabled for purchase.");
+            return False;
+        end
+
+	// Don't let cultists buy shapechange potions.
+	if (( thisagent's "title" == "cultist" ) && ( item == #Bazaar_Item_Six ))
+		return False;
+
+	// Only rangers, rogues and elves use fire balm.
+	if ( item == #Bazaar_Item_Two )
+		if (( thisagent's "title" != "ranger"  ) && ( thisagent's "title" != "rogue" ) && ( thisagent's "title" != "elf" ))
+			return False;
+
+	// See if ThisAgent already has the item on them
+	If ( $AgentHasInventoryItem ( item, thisagent ))
+		begin
+			$DebugOut ( "I already have item #", item, ", so I dont need one." );
+			return False;
+		end
+
+	If ( $Total_Gold ( ThisAgent ) < Item_Cost )
+		begin
+			$DebugOut ("I don't have enough money for item #", item, "!");
+			return False;
+		end
+
+	Intel_Roll = $RandomNumber ( 30 ) + 1;
+
+	If ( $GetAttribute ( ThisAgent, #ATTRIB_Intelligence ) > Intel_Roll )
+		begin
+			ThisAgent's "TaskName" = $Get_Bazaar_Task_Name ( item );
+			ThisAgent's "Target" = $Loyalty_Mod_Pick_Closest ( ThisAgent, Potentials );
+			$DebugOut ( "Yes!" );
+			$SetBuyerIntent ( ThisAgent, Item );
+			return True;
+		end
+
+	$DebugOut ("No!");
+	return False;
+End

@@ -1,0 +1,16 @@
+<Majesty>
+	<SteamWorkshop id="3554788619" visibility="Public">
+		<Title lang="en_US">Magic Bazaar Edicts</Title>
+		<Description lang="en_US">This mod introduces the "Bazaar is closed" building. Constructing it will prevent heroes from purchasing any items from the Bazaar. Destroying the building will restore access to all Bazaar items.
+
+A future version will allow for individually researched items to be disabled in a similar way (As opposed to closing the entire building).
+
+Compatibility: Should be compatible with most mods unless they also modify Bazaar_Item_Check function. Let me know if any incompatibilities are discovered.
+
+Special thanks to Dracoceros for helping me get started, Enerril for helping me get a stronger understanding of the GPL and helping me create new buildings, and everyone else in who have uploaded mods and participated in the Majesty community.</Description>
+		<ContentPath>C:\Users\iximi\Desktop\Majesty Modding\MODS\Magic Bazaar Edicts</ContentPath>
+		<PreviewImagePath>C:\Users\iximi\Desktop\Majesty Modding\MODS\Magic Bazaar Edicts\BazaarEdict.png</PreviewImagePath>
+		<IDTag>Mod</IDTag>
+		<IDTag>Building</IDTag>
+	</SteamWorkshop>
+</Majesty>

@@ -1,0 +1,21 @@
+<Majesty>
+
+	<Description type="Unit" subType="Building" ID="BE_Global_Toggler" Name="bazaar_closed" Description="Bazaar is closed">
+		<Engine version="1">
+			<Info value="Static"/>
+			<Info value="Directionless"/>
+			<Info value="BlockGround"/>
+			<CanUse value="HumanPlayer"/>
+			<Menu value="12"/>
+			<ImageIDBase value="BBs7"/>
+			<DefaultSound value="0"/>
+		</Engine>
+		<Game version="1">
+			<DialogID value="APb2"/>
+			<MaxHP value="10"/>
+			<Cost value="10"/>
+			<Flags value="HasHPBar"/>
+		</Game>
+	</Description>
+	
+</Majesty>

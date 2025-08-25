@@ -1,0 +1,84 @@
+// DefinitionsAndHelperFunctions.gpl
+
+// Attribute names for global bazaar item prevention flags
+expression #Bazaar_Item_One_Disabled_Attr "Bazaar_Item_One_Disabled"
+expression #Bazaar_Item_Two_Disabled_Attr "Bazaar_Item_Two_Disabled"
+expression #Bazaar_Item_Three_Disabled_Attr "Bazaar_Item_Three_Disabled"
+expression #Bazaar_Item_Four_Disabled_Attr "Bazaar_Item_Four_Disabled"
+expression #Bazaar_Item_Five_Disabled_Attr "Bazaar_Item_Five_Disabled"
+expression #Bazaar_Item_Six_Disabled_Attr "Bazaar_Item_Six_Disabled"
+
+// Chat message player feedback xml references
+expression #bazaar_closed "bazaar_closed"
+expression #bazaar_open "bazaar_open"
+
+// Internal function to ensure the global attributes exist.
+// It will create them on the first run and do nothing on subsequent calls.
+function Ensure_Bazaar_Edict_Attributes_Exist()
+declare
+    agent AIRoot;
+    boolean bHasAttribute;
+begin
+    AIRoot = $RetrieveAgent("GplAIRoot");
+    
+    // Corrected Syntax: Assign the result to a variable first to avoid compiler errors.
+    bHasAttribute = $HasAttribute(#Bazaar_Item_One_Disabled_Attr, AIRoot);
+
+    // Now, use the variable in the comparison.
+    if (bHasAttribute == FALSE)
+    begin
+        // Attributes don't exist, so create them all.
+        $DebugOut("Bazaar Edict attributes not found. Initializing for the first time.");
+        $AddAttribute(AIRoot, #Bazaar_Item_One_Disabled_Attr, "boolean", false);
+        $AddAttribute(AIRoot, #Bazaar_Item_Two_Disabled_Attr, "boolean", false);
+        $AddAttribute(AIRoot, #Bazaar_Item_Three_Disabled_Attr, "boolean", false);
+        $AddAttribute(AIRoot, #Bazaar_Item_Four_Disabled_Attr, "boolean", false);
+        $AddAttribute(AIRoot, #Bazaar_Item_Five_Disabled_Attr, "boolean", false);
+        $AddAttribute(AIRoot, #Bazaar_Item_Six_Disabled_Attr, "boolean", false);
+    end
+end
+
+// Helper function to enable or disable all bazaar items at once
+function Set_All_Bazaar_Items_Disabled(boolean isDisabled)
+declare
+    agent AIRoot;
+begin
+    // Make sure attributes exist before trying to set them.
+    $Ensure_Bazaar_Edict_Attributes_Exist();
+
+    AIRoot = $RetrieveAgent("GplAIRoot");
+    AIRoot's #Bazaar_Item_One_Disabled_Attr = isDisabled;
+    AIRoot's #Bazaar_Item_Two_Disabled_Attr = isDisabled;
+    AIRoot's #Bazaar_Item_Three_Disabled_Attr = isDisabled;
+    AIRoot's #Bazaar_Item_Four_Disabled_Attr = isDisabled;
+    AIRoot's #Bazaar_Item_Five_Disabled_Attr = isDisabled;
+    AIRoot's #Bazaar_Item_Six_Disabled_Attr = isDisabled;
+    $DebugOut("All Bazaar items have been set to disabled state: ", isDisabled);
+end
+
+
+// Helper function to check if a specific bazaar item is disabled
+function Is_Bazaar_Item_Disabled (integer item) is boolean
+declare
+    agent AIRoot;
+begin
+    // Make sure attributes exist before trying to read them.
+    $Ensure_Bazaar_Edict_Attributes_Exist();
+    
+    AIRoot = $RetrieveAgent("GplAIRoot");
+    
+	if (item == #Bazaar_Item_One)
+		return AIRoot's #Bazaar_Item_One_Disabled_Attr;
+	else if (item == #Bazaar_Item_Two)  
+		return AIRoot's #Bazaar_Item_Two_Disabled_Attr;
+	else if (item == #Bazaar_Item_Three)
+		return AIRoot's #Bazaar_Item_Three_Disabled_Attr;
+	else if (item == #Bazaar_Item_Four)
+		return AIRoot's #Bazaar_Item_Four_Disabled_Attr;
+	else if (item == #Bazaar_Item_Five)
+		return AIRoot's #Bazaar_Item_Five_Disabled_Attr;
+	else if (item == #Bazaar_Item_Six)
+		return AIRoot's #Bazaar_Item_Six_Disabled_Attr;
+	else
+		return false; // Default to allowing unknown items
+end

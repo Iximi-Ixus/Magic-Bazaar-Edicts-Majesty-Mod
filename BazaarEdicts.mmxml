@@ -1,0 +1,24 @@
+<Majesty>
+	<Mod id="{1CBB950A-B1C1-4AFB-BA1E-F8CABF894B52}">
+		<DataConfiguration>
+			<Dataset base="MajestyExpansion">
+				<Load>
+					<Descriptions>C:\Users\iximi\Desktop\Majesty Modding\MODS\Magic Bazaar Edicts\Data\EdictBuildngs.xml</Descriptions>
+					<Strings>C:\Users\iximi\Desktop\Majesty Modding\MODS\Magic Bazaar Edicts\Data\EdictText.xml</Strings>
+					<GPL>
+						<Target>C:\Users\iximi\Desktop\Majesty Modding\MODS\Magic Bazaar Edicts\BazaarEdicts.bcd</Target>
+						<Source>C:\Users\iximi\Desktop\Majesty Modding\MODS\Magic Bazaar Edicts\GPL\BirthDeathFunctions.gpl</Source>
+						<Source>C:\Users\iximi\Desktop\Majesty Modding\MODS\Magic Bazaar Edicts\GPL\DefinitionsAndHelperFunctions.gpl</Source>
+						<Source>C:\Users\iximi\Desktop\Majesty Modding\MODS\Magic Bazaar Edicts\GPL\EdictBuildings.dat</Source>
+						<Source>C:\Users\iximi\Desktop\Majesty Modding\MODS\Magic Bazaar Edicts\GPL\ModifiedBazaar_Item_Check.gpl</Source>
+					</GPL>
+				</Load>
+			</Dataset>
+		</DataConfiguration>
+		<DisplayName lang="en_US">Bazaar Edicts</DisplayName>
+		<Description lang="en_US">
+			<Short>Adds a new building that globally disables or enables all Bazaar items.</Short>
+			<Long>This mod introduces the "Bazaar is closed" building. Constructing it will prevent heroes from purchasing any items from the Bazaar. Destroying the building will restore access to all Bazaar items. Only one can be built at a time.</Long>
+		</Description>
+	</Mod>
+</Majesty>

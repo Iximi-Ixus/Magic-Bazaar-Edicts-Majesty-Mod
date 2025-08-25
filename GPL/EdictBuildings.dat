@@ -1,0 +1,12 @@
+[bazaar_closed]
+	{Building
+		(type 			building)
+		(subtype		xx)
+		(title 			bazaar_closed)
+		(Level			1)
+		(birthscript		be_basic_birth)
+		(birthScript2		bazaar_closed_Building_Birth)
+		(IGdeathscript		bazaar_closed_Building_Death)
+		(Sleep_For		10000)
+	}
+[end]

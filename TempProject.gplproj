@@ -1,0 +1,4 @@
+data="GPL\EdictBuildings.dat"
+source="GPL\BirthDeathFunctions.gpl"
+source="GPL\DefinitionsAndHelperFunctions.gpl"
+source="GPL\ModifiedBazaar_Item_Check.gpl"

@@ -1,0 +1,61 @@
+// Birth And Death scripts for Bazaar Edicts
+
+function be_basic_birth ( agent thisagent )
+declare
+	agent palace;
+	integer HP,Maxhp;
+begin
+	HP = $getattribute ( thisagent, #ATTRIB_HP );
+	MaxHP = $getattribute ( thisagent, #ATTRIB_MAXHP );
+	thisagent's "in_danger" = FALSE;
+	if ( HP != MAXHP )
+	// if (thisagent is not completed)
+		begin
+		//put thisagent on the palace's list of buildings needing
+		//	palace = $gettruepalace ( thisagent );
+		//	palace's "buildings_waiting" << thisagent;
+			$setattribute ( thisagent, #ATTRIB_HP, MaxHP);
+			$setattribute (thisagent, #ATTRIB_FirstStageBuilt, 1);
+		end
+	
+		$runthread ( thisagent's "birthscript2", 1, thisagent );
+		
+		$DebugOut (911, thisagent, " birthed");
+end
+
+// This function is called when the 'bazaar_closed' building is created.
+function bazaar_closed_Building_Birth(agent thisagent)
+declare
+begin
+	// Call the helper function to disable all bazaar items
+	$Set_All_Bazaar_Items_Disabled(true);
+
+	// Disable the building type to prevent more from being built.
+	$DisableUnitType("bazaar_closed");
+
+	$LocalChatMessage($getunitplayernumber(thisagent), #bazaar_closed);
+end
+
+// This function is called when the 'bazaar_closed' building is destroyed.
+function bazaar_closed_Building_Death(agent thisagent)
+declare
+begin
+  	thisagent's "type" = "Dead";
+
+	$release_occupants(thisagent);
+
+	//Make sure the building is taken off of the palace's construction lists
+	$Clean_Palace_Construction_Lists (ThisAgent);
+	
+	// Call the helper function to re-enable all bazaar items
+	$Set_All_Bazaar_Items_Disabled(false);
+
+	// Re-enable the building type so it can be built again.
+	$EnableUnitType("bazaar_closed");
+	
+	$LocalChatMessage($getunitplayernumber(thisagent), #bazaar_open );	
+
+	$performaction( thisagent,"Become_Rubble",thisagent );
+
+	$deleteagent(thisagent);
+end
